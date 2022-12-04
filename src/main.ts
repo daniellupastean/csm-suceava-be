@@ -9,8 +9,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('CyberGuard API')
-    .setDescription('CyberGuard API description')
+    .setTitle('CSM Suceava API')
+    .setDescription('This is the API for the CSM Suceava website.')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
