@@ -3,7 +3,7 @@ import { ApiTags } from '@nestjs/swagger';
 import * as bcrypt from 'bcrypt';
 import { AuthService } from '../services/auth.service';
 
-@ApiTags('emails')
+@ApiTags('auth')
 @Controller('')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}

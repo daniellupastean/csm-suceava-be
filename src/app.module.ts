@@ -30,6 +30,8 @@ import { AuthController } from './controllers/auth.controller';
 import { EmailsController } from './controllers/emails.controller';
 import { ArticlesService } from './services/articles.service';
 import { ArticlesController } from './controllers/articles.controller';
+import { StaffController } from './controllers/staff.controller';
+import { StaffService } from './services/staff.service';
 
 @Module({
   imports: [
@@ -60,6 +62,7 @@ import { ArticlesController } from './controllers/articles.controller';
     AuthController,
     EmailsController,
     ArticlesController,
+    StaffController,
   ],
   providers: [
     AppService,
@@ -71,6 +74,7 @@ import { ArticlesController } from './controllers/articles.controller';
     JwtStrategy,
     JwtAuthGuard,
     RolesGuard,
+    StaffService,
   ],
 })
 export class AppModule {}
