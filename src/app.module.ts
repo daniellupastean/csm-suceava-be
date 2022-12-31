@@ -17,10 +17,30 @@ import { PlayerPosition } from './entities/player-position.entity';
 import { Player } from './entities/player.entity';
 import { Team } from './entities/team.entity';
 import { Trophy } from './entities/trophy.entity';
+import { JwtModule } from '@nestjs/jwt';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { EmailsService } from './services/emails.service';
+import { AuthService } from './services/auth.service';
+import { JwtStrategy } from './strategies/jwt.strategy';
+import { JwtAuthGuard } from './guards/jwt.guard';
+import { RolesGuard } from './guards/roles.guard';
+import { mailConfig } from './mail.config';
+import { UsersService } from './services/users.service';
+import { AuthController } from './controllers/auth.controller';
+import { EmailsController } from './controllers/emails.controller';
+import { ArticlesService } from './services/articles.service';
+import { ArticlesController } from './controllers/articles.controller';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
+    MailerModule.forRoot(mailConfig),
+    JwtModule.register({
+      secret: process.env.JWT_SECRET_KEY,
+      signOptions: {
+        expiresIn: '1d',
+      },
+    }),
     TypeOrmModule.forFeature([Article]),
     TypeOrmModule.forFeature([Championship]),
     TypeOrmModule.forFeature([GalleryImage]),
@@ -34,7 +54,23 @@ import { Trophy } from './entities/trophy.entity';
     TypeOrmModule.forFeature([Trophy]),
     TypeOrmModule.forFeature([User]),
   ],
-  controllers: [AppController, GalleryController],
-  providers: [AppService, GalleryService],
+  controllers: [
+    AppController,
+    GalleryController,
+    AuthController,
+    EmailsController,
+    ArticlesController,
+  ],
+  providers: [
+    AppService,
+    GalleryService,
+    UsersService,
+    EmailsService,
+    ArticlesService,
+    AuthService,
+    JwtStrategy,
+    JwtAuthGuard,
+    RolesGuard,
+  ],
 })
 export class AppModule {}
