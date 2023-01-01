@@ -42,6 +42,12 @@ import { PlayersController } from './controllers/players.controller';
 import { PlayersService } from './services/players.service';
 import { TrophiesController } from './controllers/trophies.controller';
 import { TrophiesService } from './services/trophies.service';
+import { PlayerPositionsController } from './controllers/player-positions.controller';
+import { PlayerPositionsService } from './services/player-positions.service';
+import { MatchesController } from './controllers/matches.controller';
+import { MatchesService } from './services/matches.service';
+import { TextSectionsController } from './controllers/text-sections.controller';
+import { TextSectionsService } from './services/text-sections.service';
 
 @Module({
   imports: [
@@ -78,6 +84,9 @@ import { TrophiesService } from './services/trophies.service';
     ChampionshipsController,
     PlayersController,
     TrophiesController,
+    PlayerPositionsController,
+    MatchesController,
+    TextSectionsController,
   ],
   providers: [
     AppService,
@@ -95,6 +104,9 @@ import { TrophiesService } from './services/trophies.service';
     ChampionshipsService,
     PlayersService,
     TrophiesService,
+    PlayerPositionsService,
+    MatchesService,
+    TextSectionsService,
   ],
 })
 export class AppModule {}
