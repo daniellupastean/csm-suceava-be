@@ -34,6 +34,8 @@ import { StaffController } from './controllers/staff.controller';
 import { StaffService } from './services/staff.service';
 import { TeamsController } from './controllers/teams.controller';
 import { TeamsService } from './services/teams.service';
+import { SponsorsService } from './services/sponsors.service';
+import { SponsorsController } from './controllers/sponsors.controller';
 
 @Module({
   imports: [
@@ -66,6 +68,7 @@ import { TeamsService } from './services/teams.service';
     ArticlesController,
     StaffController,
     TeamsController,
+    SponsorsController,
   ],
   providers: [
     AppService,
@@ -79,6 +82,7 @@ import { TeamsService } from './services/teams.service';
     RolesGuard,
     StaffService,
     TeamsService,
+    SponsorsService,
   ],
 })
 export class AppModule {}

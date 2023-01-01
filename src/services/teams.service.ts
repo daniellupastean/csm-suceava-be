@@ -11,10 +11,10 @@ export class TeamsService {
   ) {}
 
   async create(category: string) {
-    const staffMember = this.teamsRepository.create({
+    const team = this.teamsRepository.create({
       category,
     });
-    return await this.teamsRepository.save(staffMember);
+    return await this.teamsRepository.save(team);
   }
 
   async findById(id: string) {
