@@ -38,6 +38,8 @@ import { SponsorsService } from './services/sponsors.service';
 import { SponsorsController } from './controllers/sponsors.controller';
 import { ChampionshipsController } from './controllers/championships.controller';
 import { ChampionshipsService } from './services/championships.service';
+import { PlayersController } from './controllers/players.controller';
+import { PlayersService } from './services/players.service';
 
 @Module({
   imports: [
@@ -72,6 +74,7 @@ import { ChampionshipsService } from './services/championships.service';
     TeamsController,
     SponsorsController,
     ChampionshipsController,
+    PlayersController,
   ],
   providers: [
     AppService,
@@ -87,6 +90,7 @@ import { ChampionshipsService } from './services/championships.service';
     TeamsService,
     SponsorsService,
     ChampionshipsService,
+    PlayersService,
   ],
 })
 export class AppModule {}
