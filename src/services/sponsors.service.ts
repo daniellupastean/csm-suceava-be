@@ -28,8 +28,8 @@ export class SponsorsService {
   }
 
   async deleteById(id: string) {
-    const team = await this.findById(id);
-    if (!team) return { message: 'Sponsor not found' };
+    const sponsor = await this.findById(id);
+    if (!sponsor) return { message: 'Sponsor not found' };
     return await this.sponsorsService.delete(id);
   }
 }
