@@ -39,4 +39,15 @@ export class UsersService {
     if (!user) return { message: 'User does not exist' };
     return await this.usersRepository.delete({ id: userId });
   }
+
+  async getUserInfo(userId: string) {
+    const user = await this.findById(userId);
+    if (!user) return { message: 'User does not exist' };
+    const userForUI = {
+      email: user.email,
+      name: user.name,
+      role: user.role,
+    };
+    return userForUI;
+  }
 }
