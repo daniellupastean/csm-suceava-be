@@ -45,8 +45,6 @@ export class AuthService {
     if (existingUser && !('message' in existingUser))
       throw new BadRequestException('Email already used');
 
-    data['role'] = 'user'; // set default role
-
     const user = await this.usersRepository.save(data);
     if (!user) throw new BadRequestException('Something went wrong');
 

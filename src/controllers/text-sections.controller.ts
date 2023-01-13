@@ -36,7 +36,7 @@ export class TextSectionsController {
     return await this.textSectionsService.findByType(type);
   }
 
-  @UseGuards(RolesGuard, JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @hasRoles('admin')
   @Put(':type')
   async updateByType(
