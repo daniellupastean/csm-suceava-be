@@ -23,6 +23,7 @@ export class TextSectionsService {
   }
 
   async findByType(type: string) {
+    console.log('type', type);
     return await this.textSectionsRepository.findOneBy({ type });
   }
 

@@ -5,6 +5,7 @@ import {
   Get,
   Delete,
   Body,
+  Query,
   Param,
   UseGuards,
 } from '@nestjs/common';
@@ -30,14 +31,9 @@ export class TextSectionsController {
     return await this.textSectionsService.findAll();
   }
 
-  @Get(':id')
-  async findById(@Param() params) {
-    return await this.textSectionsService.findById(params.id);
-  }
-
   @Get(':type')
-  async findByType(@Param() params) {
-    return await this.textSectionsService.findByType(params.type);
+  async findByType(@Param('type') type: string) {
+    return await this.textSectionsService.findByType(type);
   }
 
   @UseGuards(RolesGuard, JwtAuthGuard)
