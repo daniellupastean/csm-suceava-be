@@ -16,6 +16,7 @@ export class AuthController {
   @Post('register')
   async register(@Body() data) {
     const hashedPassword = await bcrypt.hash(data.password, 12);
+
     data.password = hashedPassword;
     return this.authService.register(data);
   }

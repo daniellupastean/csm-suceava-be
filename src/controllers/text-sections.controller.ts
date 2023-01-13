@@ -1,5 +1,18 @@
-import { Controller, Post, Get, Delete, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Put,
+  Get,
+  Delete,
+  Body,
+  Param,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger/dist';
+import { hasRoles } from 'src/decorators/roles.decorator';
+import { AuthUser } from 'src/decorators/user.decorator';
+import { JwtAuthGuard } from 'src/guards/jwt.guard';
+import { RolesGuard } from 'src/guards/roles.guard';
 import { TextSectionsService } from '../services/text-sections.service';
 
 @ApiTags('text-sections')
@@ -20,6 +33,21 @@ export class TextSectionsController {
   @Get(':id')
   async findById(@Param() params) {
     return await this.textSectionsService.findById(params.id);
+  }
+
+  @Get(':type')
+  async findByType(@Param() params) {
+    return await this.textSectionsService.findByType(params.type);
+  }
+
+  @UseGuards(RolesGuard, JwtAuthGuard)
+  @hasRoles('admin')
+  @Put(':type')
+  async updateByType(
+    @Param('type') type: string,
+    @Body('content') content: string,
+  ) {
+    return await this.textSectionsService.updateByType(type, content);
   }
 
   @Delete(':id')

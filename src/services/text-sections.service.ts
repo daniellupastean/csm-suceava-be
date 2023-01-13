@@ -22,6 +22,17 @@ export class TextSectionsService {
     return await this.textSectionsRepository.findOneBy({ id });
   }
 
+  async findByType(type: string) {
+    return await this.textSectionsRepository.findOneBy({ type });
+  }
+
+  async updateByType(type: string, content: string) {
+    const textSection = await this.findByType(type);
+    if (!textSection) return { message: 'Text section not found' };
+    textSection.content = content;
+    return await this.textSectionsRepository.save(textSection);
+  }
+
   async findAll() {
     return await this.textSectionsRepository.find();
   }
