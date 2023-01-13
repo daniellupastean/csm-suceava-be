@@ -1,7 +1,6 @@
 import { Controller, Post, Get, Delete, Body, Param } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger/dist';
 import { SponsorsService } from '../services/sponsors.service';
-import { StaffService } from '../services/staff.service';
 
 @ApiTags('sponsors')
 @Controller('sponsors')

@@ -7,16 +7,10 @@ import { AppService } from './app.service';
 import { GalleryService } from './services/gallery.service';
 import { GalleryImage } from './entities/gallery-image.entity';
 import { TextSection } from './entities/text-section.entity';
-import { StaffMember } from './entities/staff-member.entity';
 import { Sponsor } from './entities/sponsor.entity';
 import { Championship } from './entities/championship.entity';
 import { User } from './entities/user.entity';
 import { Article } from './entities/article.entity';
-import { Match } from './entities/match.entity';
-import { PlayerPosition } from './entities/player-position.entity';
-import { Player } from './entities/player.entity';
-import { Team } from './entities/team.entity';
-import { Trophy } from './entities/trophy.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { EmailsService } from './services/emails.service';
@@ -30,24 +24,15 @@ import { AuthController } from './controllers/auth.controller';
 import { EmailsController } from './controllers/emails.controller';
 import { ArticlesService } from './services/articles.service';
 import { ArticlesController } from './controllers/articles.controller';
-import { StaffController } from './controllers/staff.controller';
-import { StaffService } from './services/staff.service';
-import { TeamsController } from './controllers/teams.controller';
-import { TeamsService } from './services/teams.service';
 import { SponsorsService } from './services/sponsors.service';
 import { SponsorsController } from './controllers/sponsors.controller';
 import { ChampionshipsController } from './controllers/championships.controller';
 import { ChampionshipsService } from './services/championships.service';
-import { PlayersController } from './controllers/players.controller';
-import { PlayersService } from './services/players.service';
-import { TrophiesController } from './controllers/trophies.controller';
-import { TrophiesService } from './services/trophies.service';
-import { PlayerPositionsController } from './controllers/player-positions.controller';
-import { PlayerPositionsService } from './services/player-positions.service';
-import { MatchesController } from './controllers/matches.controller';
-import { MatchesService } from './services/matches.service';
 import { TextSectionsController } from './controllers/text-sections.controller';
 import { TextSectionsService } from './services/text-sections.service';
+import { ClubMember } from './entities/club-member.entity';
+import { ClubMembersController } from './controllers/club-members.controller';
+import { ClubMembersService } from './services/club-members.service';
 
 @Module({
   imports: [
@@ -62,14 +47,9 @@ import { TextSectionsService } from './services/text-sections.service';
     TypeOrmModule.forFeature([Article]),
     TypeOrmModule.forFeature([Championship]),
     TypeOrmModule.forFeature([GalleryImage]),
-    TypeOrmModule.forFeature([Match]),
-    TypeOrmModule.forFeature([PlayerPosition]),
-    TypeOrmModule.forFeature([Player]),
+    TypeOrmModule.forFeature([ClubMember]),
     TypeOrmModule.forFeature([Sponsor]),
-    TypeOrmModule.forFeature([StaffMember]),
-    TypeOrmModule.forFeature([Team]),
     TypeOrmModule.forFeature([TextSection]),
-    TypeOrmModule.forFeature([Trophy]),
     TypeOrmModule.forFeature([User]),
   ],
   controllers: [
@@ -78,15 +58,11 @@ import { TextSectionsService } from './services/text-sections.service';
     AuthController,
     EmailsController,
     ArticlesController,
-    StaffController,
-    TeamsController,
     SponsorsController,
     ChampionshipsController,
-    PlayersController,
-    TrophiesController,
-    PlayerPositionsController,
-    MatchesController,
+    ClubMembersController,
     TextSectionsController,
+    ClubMembersController,
   ],
   providers: [
     AppService,
@@ -98,15 +74,10 @@ import { TextSectionsService } from './services/text-sections.service';
     JwtStrategy,
     JwtAuthGuard,
     RolesGuard,
-    StaffService,
-    TeamsService,
     SponsorsService,
     ChampionshipsService,
-    PlayersService,
-    TrophiesService,
-    PlayerPositionsService,
-    MatchesService,
     TextSectionsService,
+    ClubMembersService,
   ],
 })
 export class AppModule {}
