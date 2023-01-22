@@ -15,13 +15,10 @@ export class Sponsor {
   name: string;
 
   @Column({ name: 'link' })
-  link: string;
+  website: string;
 
-  @Column({ name: 'start_date' })
-  startDate: Date;
-
-  @Column({ name: 'end_date', nullable: true })
-  endDate: Date;
+  @Column({ name: 'logo' })
+  logo: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

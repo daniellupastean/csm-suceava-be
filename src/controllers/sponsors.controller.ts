@@ -11,8 +11,8 @@ export class SponsorsController {
   async create(@Body() body) {
     return await this.sponsorsService.create(
       body.name,
-      body.link,
-      body.startDate,
+      body.logo,
+      body.website,
     );
   }
 
