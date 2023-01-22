@@ -12,7 +12,7 @@ export class GalleryImage {
   id: string;
 
   @Column({ name: 'url' })
-  url: string;
+  fileKey: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

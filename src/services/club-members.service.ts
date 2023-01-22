@@ -2,12 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ClubMember } from 'src/entities/club-member.entity';
 import { Repository } from 'typeorm';
+import { S3Service } from './s3.service';
+import * as crypto from 'crypto';
 
 @Injectable()
 export class ClubMembersService {
   constructor(
     @InjectRepository(ClubMember)
     private readonly clubMembersRepository: Repository<ClubMember>,
+    private readonly s3Service: S3Service,
   ) {}
 
   async create(
@@ -21,7 +24,6 @@ export class ClubMembersService {
   ) {
     const player = this.clubMembersRepository.create({
       fullName,
-      image,
       nationality,
       birthDate,
       height,
@@ -29,19 +31,42 @@ export class ClubMembersService {
       type,
     });
 
-    return await this.clubMembersRepository.save(player);
+    player.id = crypto.randomUUID();
+
+    const fileKey = await this.s3Service.uploadBase664File(
+      image,
+      player.id,
+      'profile-images',
+    );
+
+    player.image = fileKey;
+
+    const response = await this.clubMembersRepository.save(player);
+    response.image = this.s3Service.signGetURL(fileKey);
+
+    return response;
   }
 
   async findById(id: string) {
-    return await this.clubMembersRepository.findOneBy({ id });
+    const response = await this.clubMembersRepository.findOneBy({ id });
+    response.image = this.s3Service.signGetURL(response.image);
+    return response;
   }
 
   async findByType(type: string) {
-    return await this.clubMembersRepository.findBy({ type });
+    const members = await this.clubMembersRepository.findBy({ type });
+    return members.map((member) => {
+      member.image = this.s3Service.signGetURL(member.image);
+      return member;
+    });
   }
 
   async findAll() {
-    return await this.clubMembersRepository.find();
+    const members = await this.clubMembersRepository.find();
+    return members.map((member) => {
+      member.image = this.s3Service.signGetURL(member.image);
+      return member;
+    });
   }
 
   async deleteById(id: string) {

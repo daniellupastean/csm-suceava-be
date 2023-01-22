@@ -33,6 +33,8 @@ import { TextSectionsService } from './services/text-sections.service';
 import { ClubMember } from './entities/club-member.entity';
 import { ClubMembersController } from './controllers/club-members.controller';
 import { ClubMembersService } from './services/club-members.service';
+import { S3Service } from './services/s3.service';
+import { ScraperService } from './services/scraper.service';
 
 @Module({
   imports: [
@@ -78,6 +80,8 @@ import { ClubMembersService } from './services/club-members.service';
     ChampionshipsService,
     TextSectionsService,
     ClubMembersService,
+    S3Service,
+    ScraperService,
   ],
 })
 export class AppModule {}

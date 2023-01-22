@@ -5,6 +5,7 @@ import { UsersService } from './services/users.service';
 import { AuthUser } from './decorators/user.decorator';
 import { JwtAuthGuard } from './guards/jwt.guard';
 import { UseGuards } from '@nestjs/common/decorators';
+import { ScraperService } from './services/scraper.service';
 
 @ApiTags('app')
 @Controller()
@@ -12,6 +13,7 @@ export class AppController {
   constructor(
     private readonly appService: AppService,
     private readonly usersService: UsersService,
+    private readonly scraperService: ScraperService,
   ) {}
 
   @Get('hello')
@@ -24,5 +26,10 @@ export class AppController {
   @Get('me')
   getLoggedUserInfo(@AuthUser() user) {
     return this.usersService.getUserInfo(user.id);
+  }
+
+  @Get('test')
+  async test() {
+    return await this.scraperService.scrapeClasament();
   }
 }

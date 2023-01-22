@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Param } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { GalleryService } from '../services/gallery.service';
 
@@ -13,7 +13,12 @@ export class GalleryController {
   }
 
   @Post()
-  async save(@Body('url') url: string) {
-    return await this.galleryService.save(url);
+  async save(@Body('dataUrl') dataUrl: string) {
+    return await this.galleryService.save(dataUrl);
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string) {
+    return await this.galleryService.delete(id);
   }
 }
