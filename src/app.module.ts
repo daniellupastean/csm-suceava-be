@@ -35,6 +35,7 @@ import { ClubMembersController } from './controllers/club-members.controller';
 import { ClubMembersService } from './services/club-members.service';
 import { S3Service } from './services/s3.service';
 import { ScraperService } from './services/scraper.service';
+import { MatchesController } from './controllers/matches.controller';
 
 @Module({
   imports: [
@@ -65,6 +66,7 @@ import { ScraperService } from './services/scraper.service';
     ClubMembersController,
     TextSectionsController,
     ClubMembersController,
+    MatchesController,
   ],
   providers: [
     AppService,
