@@ -3,15 +3,19 @@ import * as puppeteer from 'puppeteer';
 
 @Injectable()
 export class ScraperService {
+  isOnAWS = process.env.NODE_ENV === 'production';
+  options = {
+    headless: true,
+    slowMo: 100,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    executablePath: this.isOnAWS ? '/usr/bin/google-chrome-stable' : undefined,
+  };
+
   async scrapeClasament() {
     let result;
 
     try {
-      const browser = await puppeteer.launch({
-        headless: true,
-        slowMo: 100,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      });
+      const browser = await puppeteer.launch(this.options);
       const page = await browser.newPage();
       await page.goto(
         'https://www.flashscore.ro/echipa/suceava/SEYT3DvL/clasament/#/GdL4AN9E/table/overall',
@@ -50,11 +54,7 @@ export class ScraperService {
     let result;
 
     try {
-      const browser = await puppeteer.launch({
-        headless: true,
-        slowMo: 100,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      });
+      const browser = await puppeteer.launch(this.options);
       const page = await browser.newPage();
       await page.goto(
         'https://www.flashscore.ro/echipa/suceava/SEYT3DvL/meciuri/',
@@ -102,11 +102,7 @@ export class ScraperService {
     let result;
 
     try {
-      const browser = await puppeteer.launch({
-        headless: true,
-        slowMo: 100,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      });
+      const browser = await puppeteer.launch(this.options);
       const page = await browser.newPage();
       await page.goto(
         'https://www.flashscore.ro/echipa/suceava/SEYT3DvL/rezultate/',
