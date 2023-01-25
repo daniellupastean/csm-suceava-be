@@ -9,6 +9,7 @@ export class ScraperService {
     slowMo: 100,
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
     executablePath: this.isOnAWS ? '/usr/bin/firefox' : undefined,
+    product: 'firefox' as puppeteer.Product,
   };
 
   async scrapeClasament() {
